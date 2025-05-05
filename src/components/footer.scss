@@ -1,0 +1,20 @@
+.footer {
+    width: 100%;
+    background: #002855;
+    color: #fff;
+    padding: 60px 40px;
+    margin-top: 60px;
+  
+    &-container {
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    &-note {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+  }
+  

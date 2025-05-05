@@ -1,22 +1,15 @@
-// src/App.js
 import React from 'react';
-import './App.scss';
+import './styles/App.scss';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
-const Header = () => (
-  <header className="header">
-    <div className="logo">NavIbiza</div>
-    <nav>
-      <ul className="nav-list">
-        <li>Inicio</li>
-        <li>Flota</li>
-        <li>Servicios</li>
-        <li>Reservas</li>
-        <li>Contacto</li>
-      </ul>
-    </nav>
-    <a href="/login" className="btn-login">Iniciar Sesión</a>
-  </header>
-);
+import Flota from './pages/Flota';
+import Servicios from './pages/Servicios';
+import Reservas from './pages/Reservas';
+import Contacto from './pages/Contacto';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 const Hero = () => (
   <section className="hero">
@@ -37,9 +30,9 @@ const Fleet = () => (
     <h2>Nuestra Flota</h2>
     <div className="card-container">
       {[
-        { id: 1, name: 'Yate 1', features: '15 m • 12 pers.', image: 'https://via.placeholder.com/360x240?text=Yacht+Serenity' },
-        { id: 2, name: 'Yate 2', features: '12 m • 8 pers.',  image: 'https://via.placeholder.com/360x240?text=Speedster+X90' },
-        { id: 3, name: 'Yate 3', features: '18 m • 15 pers.', image: 'https://via.placeholder.com/360x240?text=Catamaran+Dream' }
+        { id: 1, name: 'Yate 1', features: '15 m • 12 pers.', image: '/img/barco1.jpg' },
+        { id: 2, name: 'Yate 2', features: '12 m • 8 pers.', image: '/img/barco2.jpg' },
+        { id: 3, name: 'Yate 3', features: '18 m • 15 pers.', image: '/img/barco3.jpg' }
       ].map(boat => (
         <div key={boat.id} className="card">
           <img src={boat.image} alt={boat.name} />
@@ -60,9 +53,9 @@ const Services = () => (
     <p className="subtitle">Complementa tu experiencia con nuestros servicios premium</p>
     <div className="card-container">
       {[
-        { id: 1, title: 'Catering a Bordo',     desc: 'Gastronomía local e internacional preparada por chefs expertos' },
-        { id: 2, title: 'Deportes Acuáticos',    desc: 'Equipamiento completo para snorkel, paddle surf y más' },
-        { id: 3, title: 'Tours Privados',        desc: 'Descubre las calas más exclusivas con nuestros guías locales' }
+        { id: 1, title: 'Catering a Bordo', desc: 'Gastronomía local e internacional preparada por chefs expertos' },
+        { id: 2, title: 'Deportes Acuáticos', desc: 'Equipamiento completo para snorkel, paddle surf y más' },
+        { id: 3, title: 'Tours Privados', desc: 'Descubre las calas más exclusivas con nuestros guías locales' }
       ].map(s => (
         <div key={s.id} className="service-card">
           <h3>{s.title}</h3>
@@ -73,37 +66,29 @@ const Services = () => (
   </section>
 );
 
-const Footer = () => (
-  <footer className="footer">
-    <div className="footer-container">
-      <div>
-        <h4>Contacto</h4>
-        <p>+34 971 123 456</p>
-        <p>Pto Deportivo Marina Ibiza</p>
-      </div>
-      <div>
-        <h4>Síguenos</h4>
-        <p>Instagram | Facebook | Twitter</p>
-      </div>
-      <div>
-        <h4>Legal</h4>
-        <p>Aviso Legal</p>
-        <p>Política de Privacidad</p>
-        <p>Términos y Condiciones</p>
-      </div>
-    </div>
-    <p className="footer-note">© 2025 NavIbiza. Todos los derechos reservados.</p>
-  </footer>
-);
-
 function App() {
+  const location = useLocation();
+  const hideLayout = location.pathname === '/login' || location.pathname === '/register';
+
   return (
     <div className="App">
-      <Header />
-      <Hero />
-      <Fleet />
-      <Services />
-      <Footer />
+      {!hideLayout && <Header />}
+      <Routes>
+        <Route path="/" element={
+          <>
+            <Hero />
+            <Fleet />
+            <Services />
+          </>
+        } />
+        <Route path="/flota" element={<Flota />} />
+        <Route path="/servicios" element={<Servicios />} />
+        <Route path="/reservas" element={<Reservas />} />
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+      {!hideLayout && <Footer />}
     </div>
   );
 }
