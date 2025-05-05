@@ -1,6 +1,6 @@
 // src/App.js
 import React from 'react';
-import './App.css';
+import './App.scss';
 
 const Header = () => (
   <header className="header">
@@ -14,6 +14,7 @@ const Header = () => (
         <li>Contacto</li>
       </ul>
     </nav>
+    <a href="/login" className="btn-login">Iniciar Sesión</a>
   </header>
 );
 
