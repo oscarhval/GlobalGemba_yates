@@ -1,20 +1,36 @@
 .footer {
-    width: 100%;
-    background: #002855;
-    color: #fff;
-    padding: 60px 40px;
-    margin-top: 60px;
-  
-    &-container {
-      display: flex;
-      justify-content: space-between;
+  width: 100%;
+  background: #002855;
+  color: #fff;
+  padding: 40px 20px;
+  margin-top: auto; // importante para empujar hacia abajo
+
+  &-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &-block {
+    min-width: 150px;
+
+    h4 {
+      margin-bottom: 10px;
+      font-size: 1em;
     }
-  
-    &-note {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 0.9em;
-      color: #ccc;
+
+    p {
+      margin: 0 0 6px 0;
     }
   }
-  
+
+  &-copy, &-note {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.85em;
+    color: #ccc;
+  }
+}
